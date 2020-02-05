@@ -1,13 +1,13 @@
-const Technician = require("./models").Technician;
-const Ride = require("./models").Ride;
-const Dispatch = require("./models").Dispatch;
-const Ticket = require("./models").Ticket;
+const Technician = require("./db/models").Technician;
+const Ride = require("./db/models").Ride;
+const Dispatch = require("./db/models").Dispatch;
+const Ticket = require("./db/models").Ticket;
 
 module.exports = {
   checkUser: data => {
     const Model = data.type === "Technician" ? Technician : Dispatch;
     console.log("CHECKING USER", data);
-    return Model.find({
+    return Model.findOne({
       where: {
         username: data.username,
         password: data.password
@@ -22,7 +22,7 @@ module.exports = {
   checkRegister: data => {
     const Model = data.type === "Technician" ? Technician : Dispatch;
     console.log("CHECKING REGISTER", data);
-    return Model.find({
+    return Model.findOne({
       where: {
         username: data.username
       }
